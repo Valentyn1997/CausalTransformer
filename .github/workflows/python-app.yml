@@ -28,14 +28,6 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install flake8 pytest-xdist
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Install dependencies
-      working-directory: ./
-      run: |
-        python -m pip install --upgrade pip
-        pip install flake8 pytest
-        cd ../
-        ls -a
-        pip install -r requirements.txt
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
