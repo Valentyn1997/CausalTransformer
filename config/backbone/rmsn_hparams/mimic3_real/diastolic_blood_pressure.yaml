@@ -1,0 +1,46 @@
+# @package _global_
+dataset:
+  outcome_list:
+    - diastolic blood pressure
+
+model:
+  propensity_treatment:
+    seq_hidden_units: 4                 # rnn_hidden_units in the original terminology
+    dropout_rate: 0.1
+    num_layer: 2
+    batch_size: 64
+    max_grad_norm: 2.0
+    optimizer:
+      learning_rate: 0.01
+
+  propensity_history:
+    seq_hidden_units: 144                  # rnn_hidden_units in the original terminology
+    dropout_rate: 0.4
+    num_layer: 2
+    batch_size: 256
+    max_grad_norm: 0.5
+    optimizer:
+      learning_rate: 0.01
+
+  encoder:
+    seq_hidden_units: 144                  # rnn_hidden_units in the original terminology
+    dropout_rate: 0.5                       # Dropout of LSTM hidden layers + output layers
+    num_layer: 2
+    batch_size: 256
+    max_grad_norm: 0.5
+    optimizer:
+      learning_rate: 0.001
+
+  train_decoder: True
+  decoder:
+    seq_hidden_units: 94                  # rnn_hidden_units in the original terminology
+    dropout_rate: 0.4                       # Dropout of LSTM hidden layers + output layers
+    num_layer: 1
+    batch_size: 512
+    max_grad_norm: 1.0
+    optimizer:
+      learning_rate: 0.0001
+
+
+exp:
+  max_epochs: 200

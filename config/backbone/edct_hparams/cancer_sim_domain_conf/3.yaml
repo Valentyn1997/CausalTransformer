@@ -1,0 +1,36 @@
+# @package _global_
+dataset:
+  coeff: 3.0
+
+model:
+  encoder:
+    seq_hidden_units: 18
+    br_size: 18
+    fc_hidden_units: 18
+    dropout_rate: 0.1
+    num_layer: 2
+    batch_size: 128
+    optimizer:
+      learning_rate: 0.01
+
+    self_positional_encoding:
+      max_relative_position: 15
+
+  train_decoder: True
+  decoder:
+    optimizer:
+      learning_rate: 0.001
+    batch_size: 512
+    br_size: 6
+    fc_hidden_units: 6
+    dropout_rate: 0.3
+    num_layer: 2
+
+    cross_positional_encoding:
+      max_relative_position: 15
+
+exp:
+  weights_ema: True
+  alpha: 0.01
+  beta: 0.99
+  balancing: domain_confusion

@@ -1,0 +1,36 @@
+# Model specific parameters
+model:
+  dim_treatments: ???               # Will be defined with +dataset=...
+  dim_vitals: ???                   # Will be defined with +dataset=...
+  dim_static_features: ???          # Will be defined with +dataset=...
+  dim_outcomes: ???                 # Will be defined with +dataset=...
+
+# Dataset for training / evaluation -- specific values should be filled for each dataset
+dataset:
+  val_batch_size: ???               # Will be defined with +dataset=...
+  treatment_mode: ???               # multiclass / multilabel; Will be defined with +dataset=...
+
+# Experiment specific parameters
+exp:
+  seed: 100                         # Random seed for all the initialisations, dataset generation etc.
+  gpus: [0]                         # Number of GPUs to use / indices of GPUs like [0,1]
+  max_epochs: 100                   # Number of epochs
+  logging: True                     # Logging to MlFlow
+  mlflow_uri: http://127.0.0.1:5000 # MlFlow server is located on mtec-mis-gpu02.ethz.ch
+  unscale_rmse: ???                 # RMSE with unnormalised targets; Will be defined with +dataset=...
+  percentage_rmse: ???              # RMSE as percentage wrt norm_const; Will be defined with +dataset=...
+
+  alpha: 1.0                        # Has no full effect, if update_alpha is True
+  update_alpha: True                # Exponential growth of alpha from 0.0 to 1.0
+  alpha_rate: exp                   # exp / lin
+  balancing:                        # grad_reverse / domain_confusion
+
+  bce_weight: False                 # Weight in BCE loss, proportional to treatment frequency
+  weights_ema:                      # Exponential moving average of weights
+  beta: 0.99                        # EMA beta
+
+# Hydra defaults
+defaults:
+  - _self_
+  - override hydra/hydra_logging: colorlog
+  - override hydra/job_logging: colorlog

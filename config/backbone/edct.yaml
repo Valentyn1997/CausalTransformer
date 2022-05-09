@@ -1,0 +1,61 @@
+# @package _global_
+model:
+  name: EDCT
+  encoder:                            # Missing hyperparameters are to be filled in command line / with tune_hparams = True / selected with +backbone/edct_hparams=...
+    _target_: src.models.edct.EDCTEncoder
+    max_seq_length: ${sum:${dataset.max_seq_length},${dataset.projection_horizon}}  # Will be calculated dynamically
+    seq_hidden_units:                 # transformer hidden units (d_h / d_model)
+    br_size:
+    fc_hidden_units:
+    dropout_rate:                     # Dropout between transformer layers + output layers + attentional dropout
+    num_layer:
+    num_heads: 2
+    batch_size:
+    self_positional_encoding:
+      absolute: False
+      trainable: True
+      max_relative_position: 15
+    optimizer:
+      optimizer_cls: adam
+      learning_rate:
+      weight_decay: 0.0
+      lr_scheduler: False
+
+    tune_hparams: False
+    tune_range: 50
+    hparams_grid:
+    resources_per_trial:
+
+  train_decoder: True
+  decoder:                                  # Missing hyperparameters are to be filled in command line / with tune_hparams = True / selected with +backbone/edct_hparams=...
+    _target_: src.models.edct.EDCTDecoder
+    max_seq_length: ${dataset.projection_horizon}
+    seq_hidden_units:                       # transformer hidden units (d_h / d_model)
+    br_size:
+    fc_hidden_units:
+    dropout_rate:                           # Dropout between transformer layers + output layers + attentional dropout
+    num_layer:
+    num_heads: 2
+    batch_size:
+    self_positional_encoding:
+      absolute: False
+      trainable: True
+      max_relative_position: ${dataset.projection_horizon}
+    cross_positional_encoding:
+      absolute: False
+      trainable: True
+      max_relative_position: 15
+    optimizer:
+      optimizer_cls: adam
+      learning_rate:
+      weight_decay: 0.0
+      lr_scheduler: False
+
+    tune_hparams: False
+    tune_range: 30
+    hparams_grid:
+    resources_per_trial:
+
+exp:
+  weights_ema: False
+  balancing: grad_reverse

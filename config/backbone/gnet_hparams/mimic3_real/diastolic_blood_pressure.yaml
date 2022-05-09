@@ -1,0 +1,18 @@
+# @package _global_
+dataset:
+  outcome_list:
+    - diastolic blood pressure
+
+model:
+  g_net:
+    optimizer:
+      learning_rate: 0.001
+    num_layer: 2
+    batch_size: 256
+    seq_hidden_units: 144
+    fc_hidden_units: 72
+    dropout_rate: 0.1
+    r_size: 72
+
+exp:
+  max_epochs: 200

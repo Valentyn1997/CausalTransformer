@@ -1,0 +1,42 @@
+# @package _global_
+model:
+  g_net:
+    tune_hparams: True
+    hparams_grid:
+      num_layer:
+        - 1
+      learning_rate:
+        - 0.01
+        - 0.001
+        - 0.0001
+      batch_size:
+        - 64
+        - 128
+        - 256
+      seq_hidden_units:
+        - 0.5
+        - 1.0
+        - 2.0
+        - 3.0
+        - 4.0
+      r_size:
+        - 0.5
+        - 1.0
+        - 2.0
+        - 3.0
+        - 4.0
+      fc_hidden_units:
+        - 0.5
+        - 1.0
+        - 2.0
+        - 3.0
+        - 4.0
+      dropout_rate:
+        - 0.1
+        - 0.2
+        - 0.3
+        - 0.4
+        - 0.5
+    resources_per_trial:
+      cpu: 0.4
+      gpu: 0.2

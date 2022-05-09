@@ -1,0 +1,57 @@
+# @package _global_
+dataset:
+  _target_: src.data.MIMIC3RealDatasetCollection       # Will be dynamically instantiated
+  seed: ${exp.seed}
+  name: mimic3_real
+  path: data/processed/all_hourly_data.h5              # Path with MIMIC-3 dataset (HDFStore)
+  min_seq_length: 30                                   # Min sequence length in cohort
+  max_seq_length: 60                                   # Max sequence length in cohort
+  max_number: 5000                                     # Maximum number of patients in cohort
+  projection_horizon: 5                                # Range of tau-step-ahead prediction (tau = projection_horizon + 1)
+  split:
+    val: 0.15
+    test: 0.15
+  val_batch_size: 512                                  # Batch size for evaluation
+  treatment_mode: multilabel
+  autoregressive: True
+
+  treatment_list:
+    - vaso
+    - vent
+  outcome_list:
+    - diastolic blood pressure
+  vital_list:
+    - heart rate
+    - red blood cell count
+    - sodium
+    - mean blood pressure
+    - systemic vascular resistance
+    - glucose
+    - chloride urine
+    - glascow coma scale total
+    - hematocrit
+    - positive end-expiratory pressure set
+    - respiratory rate
+    - prothrombin time pt
+    - cholesterol
+    - hemoglobin
+    - creatinine
+    - blood urea nitrogen
+    - bicarbonate
+    - calcium ionized
+    - partial pressure of carbon dioxide
+    - magnesium
+    - anion gap
+    - phosphorous
+    - venous pvo2
+    - platelets
+    - calcium urine
+  static_list:
+    - gender
+    - ethnicity
+    - age
+  drop_first: False                                     # One-hot encoding of categorical static features
+
+exp:
+  unscale_rmse: True
+  percentage_rmse: False

@@ -1,0 +1,131 @@
+# @package _global_
+model:
+  propensity_treatment:
+    tune_hparams: True                 # Hparam tuning
+    hparams_grid:
+      num_layer:
+        - 1
+        - 2
+      learning_rate:
+        - 0.01
+        - 0.001
+        - 0.0001
+      batch_size:
+        - 64
+        - 128
+        - 256
+      seq_hidden_units:
+        - 0.5
+        - 1.0
+        - 2.0
+      dropout_rate:
+        - 0.1
+        - 0.2
+        - 0.3
+        - 0.4
+        - 0.5
+      max_grad_norm:
+        - 0.5
+        - 1.0
+        - 2.0
+    resources_per_trial:
+      cpu: 0.5
+      gpu: 0.25
+
+
+  propensity_history:
+    tune_hparams: True                 # Hparam tuning
+    hparams_grid:
+      num_layer:
+        - 1
+        - 2
+      learning_rate:
+        - 0.01
+        - 0.001
+        - 0.0001
+      batch_size:
+        - 64
+        - 128
+        - 256
+      seq_hidden_units:
+        - 0.5
+        - 1.0
+        - 2.0
+      dropout_rate:
+        - 0.1
+        - 0.2
+        - 0.3
+        - 0.4
+        - 0.5
+      max_grad_norm:
+        - 0.5
+        - 1.0
+        - 2.0
+    resources_per_trial:
+      cpu: 0.5
+      gpu: 0.25
+
+  encoder:
+    tune_hparams: True                 # Hparam tuning
+    hparams_grid:
+      num_layer:
+        - 1
+        - 2
+      learning_rate:
+        - 0.01
+        - 0.001
+        - 0.0001
+      batch_size:
+        - 64
+        - 128
+        - 256
+      seq_hidden_units:
+        - 0.5
+        - 1.0
+        - 2.0
+      dropout_rate:
+        - 0.1
+        - 0.2
+        - 0.3
+        - 0.4
+        - 0.5
+      max_grad_norm:
+        - 0.5
+        - 1.0
+        - 2.0
+    resources_per_trial:
+      cpu: 0.5
+      gpu: 0.25
+
+  decoder:
+    tune_hparams: True                   # Hparam tuning params
+    hparams_grid:
+      num_layer:
+        - 1
+        - 2
+      learning_rate:
+        - 0.01
+        - 0.001
+        - 0.0001
+      batch_size:
+        - 256
+        - 512
+        - 1024
+      seq_hidden_units:
+        - 1.0
+        - 2.0
+        - 4.0
+      dropout_rate:
+        - 0.1
+        - 0.2
+        - 0.3
+        - 0.4
+        - 0.5
+      max_grad_norm:
+        - 0.5
+        - 1.0
+        - 2.0
+        - 4.0
+    resources_per_trial:
+      cpu: 0.5
+      gpu: 0.25
