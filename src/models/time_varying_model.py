@@ -256,7 +256,8 @@ class TimeVaryingCausalModel(LightningModule):
 
     def get_normalised_n_step_rmses(self, dataset: Dataset, datasets_mc: List[Dataset] = None):
         logger.info(f'RMSE calculation for {dataset.subset_name}.')
-        assert self.model_type == 'decoder' or self.model_type == 'multi' or self.model_type == 'g_net'
+        assert self.model_type == 'decoder' or self.model_type == 'multi' or self.model_type == 'g_net' or \
+               self.model_type == 'msm_regressor'
         assert hasattr(dataset, 'data_processed_seq')
 
         unscale = self.hparams.exp.unscale_rmse

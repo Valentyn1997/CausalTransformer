@@ -116,6 +116,8 @@ def main(args: DictConfig):
     mlf_logger.log_metrics(decoder_results) if args.exp.logging else None
     results.update(decoder_results)
 
+    mlf_logger.experiment.set_terminated(mlf_logger.run_id) if args.exp.logging else None
+
     return results
 
 
