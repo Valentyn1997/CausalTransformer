@@ -1,9 +1,12 @@
 CausalTransformer
 ==============================
+[![Conference](https://img.shields.io/badge/ICML22-Paper-blue])](https://proceedings.mlr.press/v162/melnychuk22a/melnychuk22a.pdf)
+[![arXiv](https://img.shields.io/badge/arXiv-2204.07258-b31b1b.svg)](https://arxiv.org/abs/2204.07258)
+[![Python application](https://github.com/Valentyn1997/CausalTransformer/actions/workflows/python-app.yml/badge.svg)](https://github.com/Valentyn1997/CausalTransformer/actions/workflows/python-app.yml)
 
 Causal Transformer for estimating counterfactual outcomes over time.
 
-![image](https://user-images.githubusercontent.com/98563536/151961172-d3ff2905-dabf-487b-a2d3-db616d51da5d.png)
+<img width="1518" alt="Screenshot 2022-06-03 at 16 41 44" src="https://user-images.githubusercontent.com/23198776/171877145-c7cba15e-9787-4594-8f1f-cbb8b337b74a.png">
 
 
 The project is built with following Python libraries:
