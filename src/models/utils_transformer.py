@@ -303,15 +303,15 @@ class TransformerMultiInputBlock(nn.Module):
             cross_att_mask_ot_v = (active_entries_vitals.squeeze(-1).unsqueeze(1) * active_entries_treat_outcomes).unsqueeze(1)
             cross_att_mask_v_ot = (active_entries_treat_outcomes.squeeze(-1).unsqueeze(1) * active_entries_vitals).unsqueeze(1)
 
-            x_tv_ = self.cross_attention_to(x_t_, x_v, x_v, cross_att_mask_ot_v, True) if not self.disable_cross_attention \
+            x_tv_ = self.cross_attention_tv(x_t_, x_v, x_v, cross_att_mask_ot_v, True) if not self.disable_cross_attention \
                 and self.isolate_subnetwork != 't' and self.isolate_subnetwork != 'v' else 0.0
-            x_ov_ = self.cross_attention_to(x_o_, x_v, x_v, cross_att_mask_ot_v, True) if not self.disable_cross_attention \
+            x_ov_ = self.cross_attention_ov(x_o_, x_v, x_v, cross_att_mask_ot_v, True) if not self.disable_cross_attention \
                 and self.isolate_subnetwork != 'o' and self.isolate_subnetwork != 'v' else 0.0
 
-            x_v_ = self.self_attention_o(x_v, x_v, x_v, self_att_mask_v, True)
-            x_vt_ = self.cross_attention_ot(x_v_, x_t, x_t, cross_att_mask_v_ot, True) if not self.disable_cross_attention \
+            x_v_ = self.self_attention_v(x_v, x_v, x_v, self_att_mask_v, True)
+            x_vt_ = self.cross_attention_vt(x_v_, x_t, x_t, cross_att_mask_v_ot, True) if not self.disable_cross_attention \
                 and self.isolate_subnetwork != 'v' and self.isolate_subnetwork != 't' else x_v_
-            x_vo_ = self.cross_attention_ot(x_v_, x_o, x_o, cross_att_mask_v_ot, True) if not self.disable_cross_attention \
+            x_vo_ = self.cross_attention_vo(x_v_, x_o, x_o, cross_att_mask_v_ot, True) if not self.disable_cross_attention \
                 and self.isolate_subnetwork != 'v' and self.isolate_subnetwork != 'o' else 0.0
 
             out_t = self.feed_forwards[0](x_to_ + x_tv_ + x_s)
