@@ -80,4 +80,18 @@ PYTHONPATH=. CUDA_VISIBLE_DEVICES=<devices>
 python3 runnables/train_multi.py -m +dataset=cancer_sim +backbone=ct +backbone/ct_hparams/cancer_sim_domain_conf='0','1','2' exp.seed=10,101,1010,10101,101010
 ```
 
+### Updated results
+
+New results for semi-synthetic and real-world experiments after fixing a bug with self- and cross-attentions (https://github.com/Valentyn1997/CausalTransformer/issues/7). Therein, the bug affected only Tables 1 and 2, and Figure 5 (https://arxiv.org/pdf/2204.07258.pdf). Nevertheless, the performance of the CT with the bug fixed did not change drastically. 
+
+*Table 2 (updated)*. Results for experiments with real-world medical data (MIMIC-III). Shown: RMSE as mean ± standard deviation over five runs.
+
+|           | $\tau = 1$           | $\tau = 2$           | $\tau = 3$           | $\tau = 4$           | $\tau = 5$            |
+|:----------|:---------------------|:---------------------|:---------------------|:---------------------|:----------------------|
+| MSMs      | 6.37 ± 0.26          | 9.06 ± 0.41          | 11.89 ± 1.28         | 13.12 ± 1.25         | 14.44 ± 1.12          |
+| RMSNs     | 5.20 ± 0.15          | 9.79 ± 0.31          | 10.52 ± 0.39         | 11.09 ± 0.49         | 11.64 ± 0.62          |
+| CRN       | 4.84 ± 0.08          | 9.15 ± 0.16          | 9.81 ± 0.17          | 10.15 ± 0.19         | 10.40 ± 0.21          |
+| G-Net     | 5.13 ± 0.05          | 11.88 ± 0.20         | 12.91 ± 0.26         | 13.57 ± 0.30         | 14.08 ± 0.31          |
+| CT (ours, fixed) | **4.60 ± 0.08**      | **9.01 ± 0.21**      | **9.58 ± 0.19**      | **9.89 ± 0.21**      | **10.12 ± 0.22**      |
+
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
