@@ -8,11 +8,11 @@ model:
       learning_rate: 0.01
     batch_size: 64
     seq_hidden_units: 24
-    br_size: 88
-    fc_hidden_units: 44
+    br_size: 44
+    fc_hidden_units: 22
     dropout_rate: 0.1
     num_layer: 1
-    num_heads: 3
+    num_heads: 2
 
     self_positional_encoding:
       max_relative_position: 20

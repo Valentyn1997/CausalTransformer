@@ -7,10 +7,10 @@ model:
   multi:
     optimizer:
       learning_rate: 0.0001
-    batch_size: 32
+    batch_size: 64
     seq_hidden_units: 24
     br_size: 22
-    fc_hidden_units: 44
+    fc_hidden_units: 22
     dropout_rate: 0.2
     num_layer: 2
     num_heads: 3

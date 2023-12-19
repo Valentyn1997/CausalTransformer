@@ -296,7 +296,7 @@ class TimeVaryingCausalModel(LightningModule):
         self.prepare_data()
         sub_args = self.hparams.model[self.model_type]
         logger.info(f"Running hyperparameters selection with {sub_args['tune_range']} trials")
-        ray.init(num_gpus=len(eval(str(self.hparams.exp.gpus))), num_cpus=4,
+        ray.init(num_gpus=len(eval(str(self.hparams.exp.gpus))), num_cpus=4,  include_dashboard=False,
                  _redis_max_memory=ray_constants.FUNCTION_SIZE_ERROR_THRESHOLD)
 
         hparams_grid = {k: tune.choice(v) for k, v in sub_args['hparams_grid'].items()}
