@@ -106,4 +106,9 @@ New results for semi-synthetic and real-world experiments after fixing a bug wit
 | G-Net     | 5.13 ± 0.05          | 11.88 ± 0.20         | 12.91 ± 0.26         | 13.57 ± 0.30         | 14.08 ± 0.31          |
 | CT (ours, fixed) | **4.60 ± 0.08**      | **9.01 ± 0.21**      | **9.58 ± 0.19**      | **9.89 ± 0.21**      | **10.12 ± 0.22**      |
 
+*Figure 6 (updated)*. Subnetworks importance scores based on semi-synthetic benchmark (higher values correspond to higher importance of subnetwork connectivity via cross-attentions). Shown: RMSE differences between model with isolated subnetwork and full CT, means ± standard errors.
+
+![subnet-isolation](https://github.com/Valentyn1997/CausalTransformer/assets/23198776/a05925fc-bc38-488a-ac23-bab5d79892e2)
+
+
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
