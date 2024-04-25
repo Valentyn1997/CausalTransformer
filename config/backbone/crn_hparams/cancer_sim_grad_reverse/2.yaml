@@ -8,18 +8,18 @@ model:
       learning_rate: 0.001
     batch_size: 64
     seq_hidden_units: 24
-    br_size: 12
-    fc_hidden_units: 36
-    dropout_rate: 0.1
+    br_size: 24
+    fc_hidden_units: 96
+    dropout_rate: 0.2
 
   train_decoder: True
   decoder:
     optimizer:
       learning_rate: 0.001
     batch_size: 1024
-    br_size: 18
-    fc_hidden_units: 36
-    dropout_rate: 0.2
+    br_size: 24
+    fc_hidden_units: 12
+    dropout_rate: 0.1
 
 exp:
   weights_ema: False

@@ -5,11 +5,11 @@ dataset:
 model:
   multi:
     optimizer:
-      learning_rate: 0.01
-    batch_size: 256
+      learning_rate: 0.001
+    batch_size: 128
     seq_hidden_units: 16
-    br_size: 16
-    fc_hidden_units: 32
+    br_size: 12
+    fc_hidden_units: 24
     dropout_rate: 0.1
 
   self_positional_encoding:

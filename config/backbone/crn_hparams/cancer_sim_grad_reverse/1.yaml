@@ -5,11 +5,11 @@ dataset:
 model:
   encoder:
     optimizer:
-      learning_rate: 0.01  # Originally - 0.1, but the gradients are exploding
-    batch_size: 64
-    seq_hidden_units: 18
+      learning_rate: 0.001
+    batch_size: 128
+    seq_hidden_units: 24
     br_size: 18
-    fc_hidden_units: 18
+    fc_hidden_units: 36
     dropout_rate: 0.1
 
   train_decoder: True
@@ -17,8 +17,8 @@ model:
     optimizer:
       learning_rate: 0.001
     batch_size: 1024
-    br_size: 18
-    fc_hidden_units: 18
+    br_size: 24
+    fc_hidden_units: 12
     dropout_rate: 0.1
 
 exp:

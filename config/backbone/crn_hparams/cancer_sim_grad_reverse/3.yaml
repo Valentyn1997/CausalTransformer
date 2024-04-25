@@ -5,21 +5,21 @@ dataset:
 model:
   encoder:
     optimizer:
-      learning_rate: 0.01
-    batch_size: 128
-    seq_hidden_units: 18
-    br_size: 18
-    fc_hidden_units: 54
+      learning_rate: 0.001
+    batch_size: 64
+    seq_hidden_units: 24
+    br_size: 24
+    fc_hidden_units: 96
     dropout_rate: 0.2
 
   train_decoder: True
   decoder:
     optimizer:
-      learning_rate: 0.001
-    batch_size: 512
-    br_size: 6
-    fc_hidden_units: 18
-    dropout_rate: 0.3
+      learning_rate: 0.01
+    batch_size: 256
+    br_size: 18
+    fc_hidden_units: 9
+    dropout_rate: 0.1
 
 exp:
   weights_ema: False

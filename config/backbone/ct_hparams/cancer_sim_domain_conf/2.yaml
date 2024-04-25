@@ -6,9 +6,9 @@ model:
   multi:
     optimizer:
       learning_rate: 0.01
-    batch_size: 256
+    batch_size: 128
     seq_hidden_units: 16
-    br_size: 16
+    br_size: 8
     fc_hidden_units: 32
     dropout_rate: 0.1
 

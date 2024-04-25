@@ -7,8 +7,8 @@ model:
     optimizer:
       learning_rate: 0.01
     num_layer: 1
-    batch_size: 128
+    batch_size: 256
     seq_hidden_units: 24
-    fc_hidden_units: 48
+    fc_hidden_units: 72
     dropout_rate: 0.1
-    r_size: 3
+    r_size: 18

@@ -6,10 +6,10 @@ model:
   multi:
     optimizer:
       learning_rate: 0.01
-    batch_size: 256
-    seq_hidden_units: 16
+    batch_size: 128
+    seq_hidden_units: 12
     br_size: 16
-    fc_hidden_units: 32
+    fc_hidden_units: 48
     dropout_rate: 0.1
 
   self_positional_encoding:
