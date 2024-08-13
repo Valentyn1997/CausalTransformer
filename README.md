@@ -77,7 +77,7 @@ Example of running Causal Transformer on Synthetic Tumor Growth Generator with g
 
 ```console
 PYTHONPATH=. CUDA_VISIBLE_DEVICES=<devices> 
-python3 runnables/train_multi.py -m +dataset=cancer_sim +backbone=ct +backbone/ct_hparams/cancer_sim_domain_conf='0','1','2' exp.seed=10,101,1010,10101,101010
+python3 runnables/train_multi.py -m +dataset=cancer_sim +backbone=ct +backbone/ct_hparams/cancer_sim_domain_conf=\'0\',\'1\',\'2\' exp.seed=10,101,1010,10101,101010
 ```
 
 ### Updated results
