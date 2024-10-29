@@ -14,10 +14,9 @@ rdd:
   n_jobs: 8
 
 metrics:
-  # seeds: [10,101,1001,10010,10110]
-  seeds: [10]
+  seeds: [10,101,1001,10010,10110]
   max_projection_step: 5
-  ct_models_path: multirun/2024-10-28/04-43-40
+  ct_models_path: multirun/2024-10-28/04-43-40 # set value to null if there is no CT model
   tft_models: # each model is represented by name in the final file / folder path / model class path
     - - TFT_one_hot
       - TFT_repro_clean/theta_one_hot
