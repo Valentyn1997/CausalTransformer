@@ -23,7 +23,7 @@ class SyntheticDatasetCollection:
         self.train_f = None
         self.val_f = None
         self.test_cf_one_step = None
-        self.test_cf_treatment_seq = None
+        #self.test_cf_treatment_seq = None
         self.train_scaling_params = None
         self.projection_horizon = None
 
@@ -79,9 +79,9 @@ class SyntheticDatasetCollection:
         if hasattr(self, 'val_f') and self.val_f is not None:
             self.val_f.process_data(self.train_scaling_params)
         self.test_cf_one_step.process_data(self.train_scaling_params)
-        self.test_cf_treatment_seq.process_data(self.train_scaling_params)
-        self.test_cf_treatment_seq.process_sequential_test(self.projection_horizon)
-        self.test_cf_treatment_seq.process_sequential_multi(self.projection_horizon)
+        # self.test_cf_treatment_seq.process_data(self.train_scaling_params)
+        # self.test_cf_treatment_seq.process_sequential_test(self.projection_horizon)
+        # self.test_cf_treatment_seq.process_sequential_multi(self.projection_horizon)
 
         self.processed_data_multi = True
 

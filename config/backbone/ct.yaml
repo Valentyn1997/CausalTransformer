@@ -4,14 +4,14 @@ model:
   multi:                                  # Missing hyperparameters are to be filled in command line / with tune_hparams = True / selected with +backbone/ct_hparams=...
     _target_: src.models.ct.CT
     max_seq_length: ${sum:${dataset.max_seq_length},${dataset.projection_horizon}}  # Will be calculated dynamically
-    seq_hidden_units:                    # transformer hidden units (d_h / d_model)
-    br_size:
-    fc_hidden_units:
-    dropout_rate:                        # Dropout between transformer layers + output layers + attentional dropout
+    seq_hidden_units: 16                   # transformer hidden units (d_h / d_model)
+    br_size: 12
+    fc_hidden_units: 24
+    dropout_rate: 0.01                      # Dropout between transformer layers + output layers + attentional dropout
     num_layer: 1
     num_heads: 2
     max_grad_norm:
-    batch_size:
+    batch_size: 64
     attn_dropout: True
     disable_cross_attention: False
     isolate_subnetwork: _
@@ -21,7 +21,7 @@ model:
       max_relative_position: 15
     optimizer:
       optimizer_cls: adam
-      learning_rate:
+      learning_rate: 0.001
       weight_decay: 0.0
       lr_scheduler: False
 

@@ -13,8 +13,8 @@ dataset:
 # Experiment specific parameters
 exp:
   seed: 100                         # Random seed for all the initialisations, dataset generation etc.
-  gpus: [0]                         # Number of GPUs to use / indices of GPUs like [0,1]
-  max_epochs: 100                   # Number of epochs
+  gpus: []                         # Number of GPUs to use / indices of GPUs like [0,1]
+  max_epochs: 200              # Number of epochs
   logging: True                     # Logging to MlFlow
   mlflow_uri: http://127.0.0.1:5000 # MlFlow server is located on mtec-mis-gpu02.ethz.ch
   unscale_rmse: ???                 # RMSE with unnormalised targets; Will be defined with +dataset=...

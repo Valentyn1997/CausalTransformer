@@ -30,6 +30,7 @@ class CT(EDCT):
 
     model_type = 'multi'  # multi-input model
     possible_model_types = {'multi'}
+    print('+++++++++++ ENTRY')
 
     def __init__(self, args: DictConfig,
                  dataset_collection: Union[RealDatasetCollection, SyntheticDatasetCollection] = None,
@@ -74,6 +75,7 @@ class CT(EDCT):
 
             if self.seq_hidden_units is None or self.br_size is None or self.fc_hidden_units is None \
                     or self.dropout_rate is None:
+                print('---------')
                 raise MissingMandatoryValue()
 
             self.treatments_input_transformation = nn.Linear(self.dim_treatments, self.seq_hidden_units)
@@ -95,6 +97,7 @@ class CT(EDCT):
                                       disable_cross_attention=sub_args.disable_cross_attention,
                                       isolate_subnetwork=sub_args.isolate_subnetwork) for _ in range(self.num_layer)])
 
+            print('++++++++++++ TESTING ')
             self.br_treatment_outcome_head = BRTreatmentOutcomeHead(self.seq_hidden_units, self.br_size,
                                                                     self.fc_hidden_units, self.dim_treatments, self.dim_outcome,
                                                                     self.alpha, self.update_alpha, self.balancing)

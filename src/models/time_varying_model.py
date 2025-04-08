@@ -15,6 +15,9 @@ from pytorch_lightning import Trainer
 from torch_ema import ExponentialMovingAverage
 from typing import List
 from tqdm import tqdm
+import pickle
+import time
+import subprocess
 
 from src.data import RealDatasetCollection, SyntheticDatasetCollection
 from src.models.utils import grad_reverse, BRTreatmentOutcomeHead, AlphaRise, bce
@@ -208,22 +211,52 @@ class TimeVaryingCausalModel(LightningModule):
     def get_normalised_masked_rmse(self, dataset: Dataset, one_step_counterfactual=False):
         logger.info(f'RMSE calculation for {dataset.subset_name}.')
         outputs_scaled = self.get_predictions(dataset)
-        unscale = self.hparams.exp.unscale_rmse
+        unscale = self.hparams.exp.unscale_rmse 
         percentage = self.hparams.exp.percentage_rmse
 
         if unscale:
             output_stds, output_means = dataset.scaling_params['output_stds'], dataset.scaling_params['output_means']
+            print(f"output_means: {output_means}")
+            print(f"output_stds: {output_stds}")
             outputs_unscaled = outputs_scaled * output_stds + output_means
+            print(f"Min/Max outputs_scaled: {outputs_scaled.min()}, {outputs_scaled.max()}")
+            print(f"Min/Max outputs_unscaled: {outputs_unscaled.min()}, {outputs_unscaled.max()}")
+            print('++++', dataset.data)
+            timestamp = time.strftime("%Y%m%d-%H%M%S")
+            with open(f'outputs_{timestamp}.pkl', 'wb') as f:
+                pickle.dump({
+                    "y_pred": outputs_unscaled,
+                    "y_true": dataset.data['unscaled_outputs'],
+                }, f)
+            print('+++++ 1')
+            # Run the script and pass the pickle file as argument
+            subprocess.run(["python", "/Users/sneha/Downloads/CausalTransformer-main/src/models/visualizations.py", f'outputs_{timestamp}.pkl'])
 
+            print(f"Active Entries Sum: {dataset.data['active_entries'].sum()}")
+            print(f"Active Entries Shape: {dataset.data['active_entries'].shape}")
+            print(f"Active Entries (first 10): {dataset.data['active_entries'].flatten()[:10]}")
             # Batch-wise masked-MSE calculation is tricky, thus calculating for full dataset at once
+            errors = (outputs_unscaled - dataset.data['unscaled_outputs']) ** 2
+            print(f"Min/Max Squared Errors: {errors.min()}, {errors.max()}")
+            print(f"Mean Squared Error: {errors.mean()}")
             mse = ((outputs_unscaled - dataset.data['unscaled_outputs']) ** 2) * dataset.data['active_entries']
         else:
+            timestamp = time.strftime("%Y%m%d-%H%M%S")
+            with open(f'outputs_{timestamp}.pkl', 'wb') as f:
+                pickle.dump({
+                    "y_pred": outputs_scaled,
+                    "y_true": dataset.data['outputs']
+                }, f)
+            print('+++++ 2')
+            # Run the script and pass the pickle file as argument
+            subprocess.run(["python", "/Users/sneha/Downloads/CausalTransformer-main/src/models/visualizations.py", f'outputs_{timestamp}.pkl'])
             # Batch-wise masked-MSE calculation is tricky, thus calculating for full dataset at once
             mse = ((outputs_scaled - dataset.data['outputs']) ** 2) * dataset.data['active_entries']
 
         # Calculation like in original paper (Masked-Averaging over datapoints (& outputs) and then non-masked time axis)
         mse_orig = mse.sum(0).sum(-1) / dataset.data['active_entries'].sum(0).sum(-1)
         mse_orig = mse_orig.mean()
+        print(f"Normalization Constant: {dataset.norm_const}")
         rmse_normalised_orig = np.sqrt(mse_orig) / dataset.norm_const
 
         # Masked averaging over all dimensions at once
@@ -236,6 +269,7 @@ class TimeVaryingCausalModel(LightningModule):
 
         if one_step_counterfactual:
             # Only considering last active entry with actual counterfactuals
+            print('------ ENTRY 1')
             num_samples, time_dim, output_dim = dataset.data['active_entries'].shape
             last_entries = dataset.data['active_entries'] - np.concatenate([dataset.data['active_entries'][:, 1:, :],
                                                                             np.zeros((num_samples, 1, output_dim))], axis=1)
